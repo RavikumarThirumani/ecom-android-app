@@ -80,10 +80,8 @@ public class DBqueries {
                                     List<WishlistModel> viewAllProductList = new ArrayList<>();
 
                                     List<HorizontalProductScrollModel> horizontalProductScrollModelList = new ArrayList<>();
-
                                     long no_of_products = (long) documentSnapshot.get("no_of_products");
                                     for (long x = 1; x < no_of_products + 1; x++) {
-
                                         horizontalProductScrollModelList.add(
                                                 new HorizontalProductScrollModel
                                                         (documentSnapshot.get("product_ID_" + x).toString(),
@@ -91,6 +89,7 @@ public class DBqueries {
                                                                 documentSnapshot.get("product_title_" + x).toString(),
                                                                 documentSnapshot.get("product_subtitle_" + x).toString(),
                                                                 documentSnapshot.get("product_price_" + x).toString()));
+
                                         viewAllProductList.add(
                                                 new WishlistModel(documentSnapshot.get("product_image_"+x).toString()
                                                         ,documentSnapshot.get("product_full_title_" + x).toString()
@@ -111,7 +110,7 @@ public class DBqueries {
 
                                         gridLayoutModelList.add(
                                                 new HorizontalProductScrollModel
-                                                        (documentSnapshot.get("product_ID_" + x).toString(),
+                                                        (documentSnapshot.get("product_ID_1" + x).toString(),
                                                                 documentSnapshot.get("product_image_" + x).toString(),
                                                                 documentSnapshot.get("product_title_" + x).toString(),
                                                                 documentSnapshot.get("product_subtitle_" + x).toString(),

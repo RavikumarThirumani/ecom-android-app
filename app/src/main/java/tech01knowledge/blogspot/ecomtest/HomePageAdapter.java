@@ -96,7 +96,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 case HomePageModel.STRIP_AD_BANNER:
                     String resource = homePageModelList.get(position).getResource();
                     String color = homePageModelList.get(position).getBackgroundColor();
-                    ((StripAdBannerViewHolder)viewHolder).setStripAd(resource,color);
+//                    ((StripAdBannerViewHolder)viewHolder).setStripAd(resource,color);   // *** 2* changed here lec 49  *** //
                     break;
 
             case HomePageModel.HORIZONTAL_PRODUCT_VIEW:
@@ -266,7 +266,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         private void setStripAd(String resource, String color) {
 //            stripAdImage.setImageResource(resource);
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.mipmap.shoplogo)).into(stripAdImage);
-            stripAdImage.setBackgroundColor(Color.parseColor(color));
+ //           stripAdContainer.setBackgroundColor(Color.parseColor(color));   // *2** i just changed this line lec 49 *** //
         }
     }
 

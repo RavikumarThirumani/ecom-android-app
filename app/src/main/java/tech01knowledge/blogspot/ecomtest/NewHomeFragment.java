@@ -71,9 +71,6 @@ public class NewHomeFragment extends Fragment {
     private ImageView noInternetConnection;
 
 
-
-
-
     ////
 //    private ViewPager bannerSliderViewPager;
 //    private List<SliderModel> sliderModelList;   ############### delete this code
@@ -98,7 +95,7 @@ public class NewHomeFragment extends Fragment {
     //
     //    private Button horizontalViewAllBtn;
     //
-    //    private RecyclerView horizontalRecyclerView;
+    //    private RecyclerView horizontalRecyclerView;1
 
 
     @Override
@@ -158,20 +155,25 @@ public class NewHomeFragment extends Fragment {
 
         //
         categoryAdapter = new CategoryAdapter(categoryModelFakeList);
-        categoryRecyclerView.setAdapter(categoryAdapter);
+        adapter = new HomePageAdapter(homePageModelFakeList);
+     // 1*   categoryRecyclerView.setAdapter(categoryAdapter);
 
 //        adapter = new HomePageAdapter(lists.get(0));
-        homePageRecyclerView.setAdapter(adapter);
+     //2*   homePageRecyclerView.setAdapter(adapter);
 
         connectivityManager = (ConnectivityManager) getActivity().getSystemService(CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
+//
+        if (networkInfo != null && networkInfo.isConnected() == true) {
+            noInternetConnection.setVisibility(View.GONE);
 
+//3*
             if (categoryModelList.size() == 0) {
                 loadCategories(categoryRecyclerView, getContext());
             } else {
                 categoryAdapter.notifyDataSetChanged();
             }
-
+        categoryRecyclerView.setAdapter(categoryAdapter); //repasted 1*
             if (lists.size() == 0) {
                 loadedCategoriesNames.add("HOME");
                 lists.add(new ArrayList<HomePageModel>());
@@ -181,6 +183,15 @@ public class NewHomeFragment extends Fragment {
                 adapter = new HomePageAdapter(lists.get(0));
                 adapter.notifyDataSetChanged();
             }
+
+        homePageRecyclerView.setAdapter(adapter); //2*
+        } else {
+            Glide.with(this).load(R.drawable.alert).into(noInternetConnection);
+            noInternetConnection.setVisibility(View.VISIBLE);
+        }
+
+
+        //   ****** i changed few lines check videom i if any prob
 
         ///
 //        bannerSliderViewPager = view.findViewById(R.id.banner_slider_view_pager);   #####delete
@@ -332,6 +343,8 @@ public class NewHomeFragment extends Fragment {
                 loadedCategoriesNames.clear();
             if (networkInfo != null && networkInfo.isConnected() == true) {
                 noInternetConnection.setVisibility(View.GONE);
+                categoryAdapter = new CategoryAdapter(categoryModelFakeList);
+                adapter = new HomePageAdapter(homePageModelFakeList);
                 categoryRecyclerView.setAdapter(categoryAdapter);
                 homePageRecyclerView.setAdapter(adapter);
                 loadCategories(categoryRecyclerView,getContext());

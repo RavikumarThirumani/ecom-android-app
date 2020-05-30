@@ -19,7 +19,7 @@ public class VIewAllActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private GridView gridView;
-    public static List<WishlistModel> wishlistModelList;
+    public  static List<WishlistModel> wishlistModelList;   // static
 
     public static  List<HorizontalProductScrollModel> horizontalProductScrollModelList;
 

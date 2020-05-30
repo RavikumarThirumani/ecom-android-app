@@ -44,7 +44,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         long totalRatings = wishlistModelList.get(position).getTotalRatings();
         String productPrice = wishlistModelList.get(position).getProductPrice();
         String cuttedPrice = wishlistModelList.get(position).getCuttedPrice();
-        Boolean paymentMethod = wishlistModelList.get(position).isCOD();
+        boolean paymentMethod = wishlistModelList.get(position).isCOD();
 
         viewHolder.setData(resource, title, freeCoupens, rating, totalRatings, productPrice,cuttedPrice, paymentMethod);
     }
