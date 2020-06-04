@@ -1,6 +1,7 @@
 package tech01knowledge.blogspot.ecomtest;
 
 public class WishlistModel {
+    private String productId;
     private String productImage;
     private String productTitle;
     private long freeCoupens;
@@ -10,7 +11,8 @@ public class WishlistModel {
     private String cuttedPrice;
     private boolean COD;
 
-    public WishlistModel(String productImage, String productTitle, long freeCoupens, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD) {
+    public WishlistModel(String productId,String productImage, String productTitle, long freeCoupens, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD) {
+        this.productId = productId;
         this.productImage = productImage;
         this.productTitle = productTitle;
         this.freeCoupens = freeCoupens;
@@ -19,6 +21,14 @@ public class WishlistModel {
         this.productPrice = productPrice;
         this.cuttedPrice = cuttedPrice;
         this.COD = COD;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getProductImage() {

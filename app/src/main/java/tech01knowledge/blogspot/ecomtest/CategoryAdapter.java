@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private List<categoryModel> categoryModelList;
+    private int lastPosition = -1;
 
     public CategoryAdapter(List<categoryModel> categoryModelList) {
         this.categoryModelList = categoryModelList;
@@ -37,6 +40,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         String name = categoryModelList.get(position).getCategoryName();
         viewHolder.setCategory(name, position);
         viewHolder.setCategoryIcon(icon);
+
+        if (lastPosition < position) {
+            Animation animation = AnimationUtils.loadAnimation(viewHolder.itemView.getContext(), R.anim.fade_in);
+            viewHolder.itemView.setAnimation(animation);
+            lastPosition = position;
+        }
 
     }
 
@@ -58,22 +67,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         private void setCategoryIcon(String iconUrl) {
             if (!iconUrl.equals("null")) {
-                Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.shoplogo)).into(categoryIcon);
+                Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.placeholder)).into(categoryIcon);
+            } else {
+                categoryIcon.setImageResource(R.mipmap.shoplogo);
             }
         }
         private void setCategory(final String name, final int position) {
             categoryName.setText(name);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (position != 0) {
-                    Intent categoryIntent = new Intent(itemView.getContext(), CategoryActivity.class);
-                    categoryIntent.putExtra("categoryName",name);
-                    itemView.getContext().startActivity(categoryIntent);
+            if(!name.equals("")) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (position != 0) {
+                            Intent categoryIntent = new Intent(itemView.getContext(), CategoryActivity.class);
+                            categoryIntent.putExtra("categoryName", name);
+                            itemView.getContext().startActivity(categoryIntent);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 }

@@ -38,7 +38,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, final ViewGroup viewGroup) {
+    public View getView(final int position, View convertView, final ViewGroup viewGroup) {
         View view;
         if (convertView == null) {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.horizontal_scroll_item_layout, null);
@@ -50,6 +50,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent productDetailsIntent = new Intent(viewGroup.getContext(), ProductDetailsActivity.class);
+                    productDetailsIntent.putExtra("PRODUCT_ID", horizontalProductScrollModelList.get(position).getProductID());
                     viewGroup.getContext().startActivity(productDetailsIntent);
                 }
             });
@@ -59,10 +60,10 @@ public class GridProductLayoutAdapter extends BaseAdapter {
             TextView productDescription = view.findViewById(R.id.h_s_product_description);
             TextView productPrice = view.findViewById(R.id.h_s_product_price);
 
-            Glide.with(viewGroup.getContext()).load(horizontalProductScrollModelList.get(i).getProductImage()).apply(new RequestOptions().placeholder(R.mipmap.shoplogo)).into(productImage);
-            productTitle.setText(horizontalProductScrollModelList.get(i).getProductTitle());
-            productDescription.setText(horizontalProductScrollModelList.get(i).getProductDescription());
-            productPrice.setText("Rs." + horizontalProductScrollModelList.get(i).getProductPrice() + "/-");
+            Glide.with(viewGroup.getContext()).load(horizontalProductScrollModelList.get(position).getProductImage()).apply(new RequestOptions().placeholder(R.mipmap.placeholder)).into(productImage);
+            productTitle.setText(horizontalProductScrollModelList.get(position).getProductTitle());
+            productDescription.setText(horizontalProductScrollModelList.get(position).getProductDescription());
+            productPrice.setText("Rs." + horizontalProductScrollModelList.get(position).getProductPrice() + "/-");
 
         } else {
             view = convertView;

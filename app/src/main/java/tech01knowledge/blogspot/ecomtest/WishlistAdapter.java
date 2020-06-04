@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,9 +21,8 @@ import java.util.List;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder> {
     private List<WishlistModel> wishlistModelList;
-
     private Boolean wishlist;
-
+    private int lastPosition = -1;
     public WishlistAdapter(List<WishlistModel> wishlistModelList, Boolean wishlist) {
         this.wishlistModelList = wishlistModelList;
         this.wishlist = wishlist;
@@ -34,9 +35,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.wishlist_item_layout, viewGroup, false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        String productId = wishlistModelList.get(position).getProductId();
         String resource = wishlistModelList.get(position).getProductImage();
         String title = wishlistModelList.get(position).getProductTitle();
         long freeCoupens = wishlistModelList.get(position).getFreeCoupens();
@@ -46,7 +47,13 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         String cuttedPrice = wishlistModelList.get(position).getCuttedPrice();
         boolean paymentMethod = wishlistModelList.get(position).isCOD();
 
-        viewHolder.setData(resource, title, freeCoupens, rating, totalRatings, productPrice,cuttedPrice, paymentMethod);
+        viewHolder.setData(productId,resource, title, freeCoupens, rating, totalRatings, productPrice, cuttedPrice, paymentMethod, position);
+
+        if (lastPosition < position) {
+            Animation animation = AnimationUtils.loadAnimation(viewHolder.itemView.getContext(), R.anim.fade_in);
+            viewHolder.itemView.setAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override
@@ -82,8 +89,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             deleteBtn = itemView.findViewById(R.id.delete_btn);
 
         }
-        private void setData(String resource, String title, long freeCoupensNo, String averageRate,  long totalRatingsNo, String price,String cuttedPriceValue, boolean COD) {
-            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.mipmap.shoplogo)).into(productImage);
+        private void setData(final String productId, String resource, String title, long freeCoupensNo, String averageRate, long totalRatingsNo, String price, String cuttedPriceValue, boolean COD, final int index) {
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.mipmap.placeholder)).into(productImage);
             productTitle.setText(title);
 
             if (freeCoupensNo != 0) {
@@ -119,7 +126,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(itemView.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                    if (!ProductDetailsActivity.running_wishlist_query ) {
+                        ProductDetailsActivity.running_wishlist_query = true;
+                        DBqueries.removeFromWishlist(index, itemView.getContext());
+//                    Toast.makeText(itemView.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -127,6 +138,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+                    productDetailsIntent.putExtra("PRODUCT_ID",productId);
                     itemView.getContext().startActivity(productDetailsIntent);
                 }
             });

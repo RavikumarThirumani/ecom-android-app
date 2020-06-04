@@ -130,6 +130,7 @@ public class CategoryActivity extends AppCompatActivity {
         if(listPosition==0){
             loadedCategoriesNames.add(title.toUpperCase());
             lists.add(new ArrayList<HomePageModel>());
+            adapter = new HomePageAdapter(lists.get(loadedCategoriesNames.size()-1));
             loadFragmentData(categoryRecyclerview, this,loadedCategoriesNames.size()-1,title);
         }else{
             adapter = new HomePageAdapter(lists.get(listPosition));

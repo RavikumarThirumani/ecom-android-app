@@ -70,6 +70,8 @@ public class NewHomeFragment extends Fragment {
 
     private ImageView noInternetConnection;
 
+    private Button retryBtn;
+
 
     ////
 //    private ViewPager bannerSliderViewPager;
@@ -106,6 +108,7 @@ public class NewHomeFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout);
         noInternetConnection = view.findViewById(R.id.no_internet_connection);
         categoryRecyclerView = view.findViewById(R.id.category_recyclerview);
+        retryBtn = view.findViewById(R.id.retey_btn);
 
         swipeRefreshLayout.setColorSchemeColors(getContext().getResources().getColor(R.color.colorPrimary), getContext().getResources().getColor(R.color.colorPrimary), getContext().getResources().getColor(R.color.colorPrimary));
 
@@ -118,23 +121,26 @@ public class NewHomeFragment extends Fragment {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         homePageRecyclerView.setLayoutManager(testingLayoutManager);
 
+        //////////////////////////////Categories Fake List
         categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
-        categoryModelFakeList.add(new categoryModel("null",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
+        categoryModelFakeList.add(new categoryModel("",""));
         //
+
+        //////////////////////////////HomePage Fake List
         List<SliderModel> sliderModelFakeList = new ArrayList<>();
-        sliderModelFakeList.add(new SliderModel("null", "#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null", "#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null", "#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null", "#ffffff"));
-        sliderModelFakeList.add(new SliderModel("null", "#ffffff"));
+        sliderModelFakeList.add(new SliderModel("null", "#dfdfdf"));
+        sliderModelFakeList.add(new SliderModel("null", "#dfdfdf"));
+        sliderModelFakeList.add(new SliderModel("null", "#dfdfdf"));
+        sliderModelFakeList.add(new SliderModel("null", "#dfdfdf"));
+        sliderModelFakeList.add(new SliderModel("null", "#dfdfdf"));
 
         List<HorizontalProductScrollModel> horizontalProductScrollModelFakeList = new ArrayList<>();
         horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("", "", "", "", ""));
@@ -149,9 +155,9 @@ public class NewHomeFragment extends Fragment {
         horizontalProductScrollModelFakeList.add(new HorizontalProductScrollModel("", "", "", "", ""));
 
         homePageModelFakeList.add(new HomePageModel(0,sliderModelFakeList));
-        homePageModelFakeList.add(new HomePageModel(1,"",""));
-        homePageModelFakeList.add(new HomePageModel(2,"","#ffffff",horizontalProductScrollModelFakeList,new ArrayList<WishlistModel>()));
-        homePageModelFakeList.add(new HomePageModel(3,"","#ffffff",horizontalProductScrollModelFakeList));
+        homePageModelFakeList.add(new HomePageModel(1,"","dfdfdf"));
+        homePageModelFakeList.add(new HomePageModel(2,"","#dfdfdf",horizontalProductScrollModelFakeList,new ArrayList<WishlistModel>()));
+        homePageModelFakeList.add(new HomePageModel(3,"","#dfdfdf",horizontalProductScrollModelFakeList));
 
         //
         categoryAdapter = new CategoryAdapter(categoryModelFakeList);
@@ -165,29 +171,36 @@ public class NewHomeFragment extends Fragment {
         networkInfo = connectivityManager.getActiveNetworkInfo();
 //
         if (networkInfo != null && networkInfo.isConnected() == true) {
+            MainActivity.drawer.setDrawerLockMode(0);
             noInternetConnection.setVisibility(View.GONE);
-
+            retryBtn.setVisibility(View.GONE);
+            categoryRecyclerView.setVisibility(View.VISIBLE);
+            homePageRecyclerView.setVisibility(View.VISIBLE);
 //3*
             if (categoryModelList.size() == 0) {
                 loadCategories(categoryRecyclerView, getContext());
             } else {
+                categoryAdapter = new CategoryAdapter(categoryModelList);
                 categoryAdapter.notifyDataSetChanged();
             }
         categoryRecyclerView.setAdapter(categoryAdapter); //repasted 1*
             if (lists.size() == 0) {
                 loadedCategoriesNames.add("HOME");
                 lists.add(new ArrayList<HomePageModel>());
-
+//                adapter = new HomePageAdapter(lists.get(0));  //##
                 loadFragmentData(homePageRecyclerView, getContext(),0, "Home");
             } else {
                 adapter = new HomePageAdapter(lists.get(0));
                 adapter.notifyDataSetChanged();
             }
-
         homePageRecyclerView.setAdapter(adapter); //2*
         } else {
+            MainActivity.drawer.setDrawerLockMode(1);
+            categoryRecyclerView.setVisibility(View.GONE);
+            homePageRecyclerView.setVisibility(View.GONE);
             Glide.with(this).load(R.drawable.alert).into(noInternetConnection);
             noInternetConnection.setVisibility(View.VISIBLE);
+            retryBtn.setVisibility(View.VISIBLE);
         }
 
 
@@ -338,24 +351,15 @@ public class NewHomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                categoryModelList.clear();
-                lists.clear();
-                loadedCategoriesNames.clear();
-            if (networkInfo != null && networkInfo.isConnected() == true) {
-                noInternetConnection.setVisibility(View.GONE);
-                categoryAdapter = new CategoryAdapter(categoryModelFakeList);
-                adapter = new HomePageAdapter(homePageModelFakeList);
-                categoryRecyclerView.setAdapter(categoryAdapter);
-                homePageRecyclerView.setAdapter(adapter);
-                loadCategories(categoryRecyclerView,getContext());
-                loadedCategoriesNames.add("HOME");
-                lists.add(new ArrayList<HomePageModel>());
-                loadFragmentData(homePageRecyclerView, getContext(),0, "Home");
-            } else {
+                reloadPage();
 
-                Glide.with(getContext()).load(R.drawable.alert).into(noInternetConnection);
-                noInternetConnection.setVisibility(View.VISIBLE);
             }
+        });
+
+        retryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reloadPage();
             }
         });
         return view;
@@ -402,4 +406,38 @@ public class NewHomeFragment extends Fragment {
 
     //
 
+    private void reloadPage() {
+        networkInfo = connectivityManager.getActiveNetworkInfo();
+        categoryModelList.clear();
+        lists.clear();
+        loadedCategoriesNames.clear();
+        if (networkInfo != null && networkInfo.isConnected() == true) {
+            MainActivity.drawer.setDrawerLockMode(0);
+            noInternetConnection.setVisibility(View.GONE);
+            retryBtn.setVisibility(View.GONE);
+            categoryRecyclerView.setVisibility(View.VISIBLE);
+            homePageRecyclerView.setVisibility(View.VISIBLE);
+            categoryAdapter = new CategoryAdapter(categoryModelFakeList);
+            adapter = new HomePageAdapter(homePageModelFakeList);
+            categoryAdapter = new CategoryAdapter(categoryModelFakeList);
+            adapter = new HomePageAdapter(homePageModelFakeList);
+            categoryRecyclerView.setAdapter(categoryAdapter);
+            homePageRecyclerView.setAdapter(adapter);
+
+            loadCategories(categoryRecyclerView,getContext());
+            loadedCategoriesNames.add("HOME");
+            lists.add(new ArrayList<HomePageModel>());
+            loadFragmentData(homePageRecyclerView, getContext(),0, "Home");
+        } else {
+            MainActivity.drawer.setDrawerLockMode(1);
+            Toast.makeText(getContext(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
+            categoryRecyclerView.setVisibility(View.GONE);
+            homePageRecyclerView.setVisibility(View.GONE);
+            Glide.with(getContext()).load(R.drawable.alert).into(noInternetConnection);
+            noInternetConnection.setVisibility(View.VISIBLE);
+            retryBtn.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(false);
+        }
+
+    }
 }

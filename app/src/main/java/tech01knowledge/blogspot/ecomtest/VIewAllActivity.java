@@ -19,7 +19,7 @@ public class VIewAllActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private GridView gridView;
-    public  static List<WishlistModel> wishlistModelList;   // static
+    public  static List<WishlistModel> wishlistModelList;
 
     public static  List<HorizontalProductScrollModel> horizontalProductScrollModelList;
 
@@ -40,12 +40,10 @@ public class VIewAllActivity extends AppCompatActivity {
         int layout_code = getIntent().getIntExtra("layout_code", -1);
 
         if (layout_code == 0) {
-
             recyclerView.setVisibility(View.VISIBLE);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             layoutManager.setOrientation(RecyclerView.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
-
 //
 //            List<WishlistModel> wishlistModelList = new ArrayList<>();
 //            wishlistModelList.add(new WishlistModel(R.drawable.mob3, "Redmi 5", 1, "3", 32, "Rs.49,999", "Rs.59,999", "Cash on delivery"));
@@ -59,16 +57,11 @@ public class VIewAllActivity extends AppCompatActivity {
 //            wishlistModelList.add(new WishlistModel(R.drawable.mob3, "Redmi 5", 2, "3", 32, "Rs.49,999", "Rs.59,999", "Cash on delivery"));
 //            wishlistModelList.add(new WishlistModel(R.drawable.mob3, "Redmi 5", 4, "3", 32, "Rs.49,999", "Rs.59,999", "Cash on delivery"));
 //            wishlistModelList.add(new WishlistModel(R.drawable.mob3, "Redmi 5", 1, "3", 32, "Rs.49,999", "Rs.59,999", "Cash on delivery"));
-
-
             WishlistAdapter adapter = new WishlistAdapter(wishlistModelList, false);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
         } else if (layout_code == 1) {
-
             gridView.setVisibility(View.VISIBLE);
-
 //            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.mob1, "Redmi 5", "S D 425", "Rs.9,999"));
 //            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.mob2, "Redmi 5", "S D 425", "Rs.9,999"));
 //            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.mob3, "Redmi 5", "S D 425", "Rs.9,999"));
@@ -84,13 +77,10 @@ public class VIewAllActivity extends AppCompatActivity {
 //            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.mob2, "Redmi 5", "S D 425", "Rs.9,999"));
 //            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.mob3, "Redmi 5", "S D 425", "Rs.9,999"));
 //            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.mob4, "Redmi 5", "S D 425", "Rs.9,999"));
-
             GridProductLayoutAdapter gridProductLayoutAdapter = new GridProductLayoutAdapter(horizontalProductScrollModelList);
             gridView.setAdapter(gridProductLayoutAdapter);
 
         }
-
-
     }
 
     @Override
