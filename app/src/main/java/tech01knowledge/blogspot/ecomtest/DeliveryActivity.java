@@ -44,13 +44,7 @@ public class DeliveryActivity extends AppCompatActivity {
         deliveryRecyclerView.setLayoutManager(layoutManager);
 
         List<CartItemModel> cartItemModelList = new ArrayList<>();
-        cartItemModelList.add(new CartItemModel(0, R.drawable.mob3, "Redmi 5",2,"Rs. 49,999","Rs.59,999/-",1,0,0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.mob3, "Redmi 5",0,"Rs. 49,999","Rs.59,999/-",1,1,0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.mob3, "Redmi 5",0,"Rs. 49,999","Rs.59,999/-",1,1,0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.mob3, "Redmi 5",0,"Rs. 49,999","Rs.59,999/-",1,1,0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.mob3, "Redmi 5",0,"Rs. 49,999","Rs.59,999/-",1,1,0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.mob3, "Redmi 5",0,"Rs. 49,999","Rs.59,999/-",1,1,0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.mob3, "Redmi 5",0,"Rs. 49,999","Rs.59,999/-",1,1,0));
+
 
         CartAdapter cartAdapter = new CartAdapter(cartItemModelList);
         deliveryRecyclerView.setAdapter(cartAdapter);
