@@ -28,6 +28,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Redmi 5 (GOLD)"
+        android:fontFamily="serif"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:text="free 2 coupens"
         android:textColor="#8000ff"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/free_coupen_icon"
         app:layout_constraintTop_toBottomOf="@+id/product_title" />
@@ -61,6 +63,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="Rs.43,333/-"
+        android:fontFamily="serif"
         android:textSize="22sp"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -72,6 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rs. 59,999/-"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_price"
         app:layout_constraintEnd_toStartOf="@+id/product_price" />
@@ -92,10 +96,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Offers Applied"
-        android:textSize="12sp"
+        android:fontFamily="serif"
         android:textColor="@color/successgreen"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+        app:layout_constraintTop_toBottomOf="@+id/product_price"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/coupons_applied"
@@ -103,10 +109,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Coupons Applied"
+        android:fontFamily="serif"
         android:textColor="@color/colorPrimary"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/offers_applied" />
+        app:layout_constraintTop_toBottomOf="@+id/offers_applied"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/product_quantity"
@@ -118,6 +126,7 @@
         android:background="@drawable/border_background"
         android:backgroundTint="#000000"
         android:padding="3dp"
+        android:fontFamily="serif"
         android:drawableEnd="@mipmap/downarrow"
         android:drawablePadding="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/coupons_applied"
@@ -129,7 +138,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#FF3030"
+        android:background="@color/coupenRed"
         android:gravity="right"
         android:orientation="horizontal"
         android:padding="16dp"
@@ -142,7 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Check prize after coupon redemption"
+            android:text="Apply your coupon here"
+            android:fontFamily="serif"
             android:textAlignment="center"
             android:textColor="@color/colorAccent" />
 
@@ -151,6 +161,7 @@
             android:layout_width="75dp"
             android:layout_height="30dp"
             android:background="@drawable/border_background"
+            android:fontFamily="serif"
             android:text="Redeem"
             android:textColor="@color/colorAccent"
             android:textSize="12sp" />
@@ -174,7 +185,21 @@
             android:layout_height="match_parent"
             android:text="Remove Item"
             android:gravity="center"
+            android:fontFamily="serif"
             android:drawablePadding="4dp"
             android:drawableStart="@mipmap/delete" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/cod_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_free_coupen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_free_coupen"
+        app:layout_constraintTop_toTopOf="@+id/tv_free_coupen"
+        app:srcCompat="@drawable/cod2"
+        tools:visibility="invisible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Price Details"
+            android:fontFamily="serif"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,6 +49,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Price (2 items)"
+            android:fontFamily="serif"
             android:textColor="#000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider6" />
@@ -69,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="serif"
             android:text="Rs. 49,999/-"
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +84,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="Free"
+            android:fontFamily="serif"
             android:textColor="@color/successgreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/total_items_price" />
@@ -101,8 +105,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Total AMount"
+            android:text="Total Amount"
             android:textColor="#000000"
+            android:fontFamily="serif"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider7" />
@@ -113,8 +118,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Rs. 49,999/-"
+            android:text="Rs.49,999/-"
             android:textColor="#000000"
+            android:fontFamily="serif"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider7" />
@@ -137,6 +143,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="You Saved Rs. 9,999/- on ths order"
+            android:fontFamily="serif"
             android:textColor="@color/successgreen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

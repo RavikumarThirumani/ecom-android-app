@@ -59,7 +59,8 @@
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorPrimary"
             android:inputType="textPersonName"
-            android:hint="City*" />
+                android:fontFamily="serif"
+                android:hint="City*" />
             <EditText
                 android:id="@+id/locality"
                 android:layout_width="match_parent"
@@ -73,7 +74,8 @@
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/colorPrimary"
                 android:inputType="textMultiLine"
-                android:hint="Locaality, area or Streat*" />
+                android:fontFamily="serif"
+                android:hint="Locality, area or Streat*" />
 
             <EditText
                 android:id="@+id/flat_no"
@@ -86,6 +88,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="serif"
                 android:textColor="@color/colorPrimary"
                 android:inputType="textMultiLine"
                 android:hint="Flat No, Building Name*" />
@@ -104,19 +107,19 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:hint="Pincode*"
+                    android:fontFamily="serif"
                     android:inputType="number"
                     android:textColor="@color/colorPrimary" />
 
-                <EditText
-
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/stateSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:hint="State*"
-                    android:inputType="textPersonName"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="16dp"
-                    android:textColor="@color/colorPrimary" />
+                    android:background="@drawable/border_background"
+                    android:backgroundTint="@color/RecyclerViewBackground"/>
             </LinearLayout>
 
             <EditText
@@ -127,8 +130,9 @@
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
+                android:fontFamily="serif"
                 android:hint="Landmart(optional)"
-                android:inputType="number"
+                android:inputType="textMultiLine"
                 android:textColor="@color/colorPrimary" />
 
             <View
@@ -148,6 +152,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:hint="Name*"
+                android:fontFamily="serif"
+
                 android:inputType="textPersonName"
                 android:textColor="@color/colorPrimary" />
 
@@ -160,6 +166,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:hint="Mobile Number*"
+                android:fontFamily="serif"
                 android:inputType="number"
                 android:textColor="@color/colorPrimary" />
 
@@ -171,6 +178,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:hint="Alternte mobile Number(Optional)"
+                android:fontFamily="serif"
                 android:inputType="number"
                 android:textColor="@color/colorPrimary" />
 
@@ -180,6 +188,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="16dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="serif"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Save"
                 android:textColor="@color/colorAccent" />

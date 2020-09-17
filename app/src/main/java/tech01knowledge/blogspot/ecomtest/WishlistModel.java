@@ -1,5 +1,7 @@
 package tech01knowledge.blogspot.ecomtest;
 
+import java.util.ArrayList;
+
 public class WishlistModel {
     private String productId;
     private String productImage;
@@ -10,8 +12,10 @@ public class WishlistModel {
     private String productPrice;
     private String cuttedPrice;
     private boolean COD;
+    private boolean inStock;
+    private ArrayList<String> tags;
 
-    public WishlistModel(String productId,String productImage, String productTitle, long freeCoupens, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD) {
+    public WishlistModel(String productId,String productImage, String productTitle, long freeCoupens, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD, boolean inStock) {
         this.productId = productId;
         this.productImage = productImage;
         this.productTitle = productTitle;
@@ -21,6 +25,23 @@ public class WishlistModel {
         this.productPrice = productPrice;
         this.cuttedPrice = cuttedPrice;
         this.COD = COD;
+        this.inStock = inStock;
+    }
+
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
     }
 
     public String getProductId() {

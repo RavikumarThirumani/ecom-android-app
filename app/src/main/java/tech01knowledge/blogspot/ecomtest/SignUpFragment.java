@@ -117,6 +117,7 @@ public class SignUpFragment extends Fragment {
                 mainIntent();
             }
         });
+
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -215,14 +216,51 @@ public class SignUpFragment extends Fragment {
         });
     }
 
+    private void setFragment(Fragment fragment) {
+
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slideout_from_left);
+        fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void checkInputs() {
+        if (!TextUtils.isEmpty(email.getText())) {
+            if (TextUtils.isEmpty(fullName.getText())) {
+                if (TextUtils.isEmpty(password.getText()) && password.length()>= 8) {
+                    if (TextUtils.isEmpty(confirmPassword.getText())) {
+                        signUpBtn.setEnabled(true);
+                        signUpBtn.setTextColor(Color.rgb(255,255,255));
+                    } else {
+                        signUpBtn.setEnabled(true);
+                        signUpBtn.setTextColor(Color.argb(50,255,255,255));
+                    }
+                } else {
+                    signUpBtn.setEnabled(true);
+                    signUpBtn.setTextColor(Color.argb(50,255,255,255));
+                }
+            } else  {
+                signUpBtn.setEnabled(true);
+                signUpBtn.setTextColor(Color.argb(50,255,255,255));
+            }
+        } else {
+            signUpBtn.setEnabled(true);
+            signUpBtn.setTextColor(Color.argb(50,255,255,255));
+        }
+    }
+
     private void checkEmailAndPassword() {
+        // todo Check this below 2 lines & updateInfoFragment
+        Drawable customErrorIcon = getResources().getDrawable(R.mipmap.alert);
+        customErrorIcon.setBounds(0,0,customErrorIcon.getIntrinsicWidth(), customErrorIcon.getIntrinsicHeight());
+
         if (email.getText().toString().matches(emailPattern)){
             if (password.getText().toString().equals(confirmPassword.getText().toString())) {
-                Drawable alertIcon = getResources().getDrawable(R.mipmap.alert);
-                alertIcon.setBounds(0,0,alertIcon.getIntrinsicWidth(), alertIcon.getIntrinsicHeight());
+
                 progressBar.setVisibility(View.VISIBLE);
                 signUpBtn.setEnabled(false);
                 signUpBtn.setTextColor(Color.rgb(255,255,255));
+
                 firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -230,6 +268,8 @@ public class SignUpFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     Map<String, Object> userdata = new HashMap<>();
                                     userdata.put("fullname", fullName.getText().toString());
+                                    userdata.put("email", email.getText().toString());
+                                    userdata.put("profile", "");
                                     firebaseFirestore.collection("USERS").document(firebaseAuth.getUid())
                                             .set(userdata)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -248,15 +288,27 @@ public class SignUpFragment extends Fragment {
                                                         Map<String, Object> cartMap = new HashMap<>();
                                                         cartMap.put("list_size", (long) 0);
 
+                                                        Map<String, Object> myAddressesMap = new HashMap<>();
+                                                        myAddressesMap.put("list_size", (long) 0);
+
+                                                        Map<String, Object> notificationsMap = new HashMap<>();
+                                                        notificationsMap.put("list_size", (long) 0);
+
+
                                                         final List<String> documentNames = new ArrayList<>();
                                                         documentNames.add("MY_WISHLIST");
                                                         documentNames.add("MY_RATINGS");
                                                         documentNames.add("MY_CART");
+                                                        documentNames.add("MY_ADDRESSES");
+                                                        documentNames.add("MY_NOTIFICATIONS");
 
                                                         List<Map<String, Object>> documentFields = new ArrayList<>();
                                                         documentFields.add(wishListMap);
                                                         documentFields.add(ratingsMap);
                                                         documentFields.add(cartMap);
+                                                        documentFields.add(myAddressesMap);
+                                                        documentFields.add(notificationsMap);
+
                                                         //todo Maps
 
                                                         for (int x = 0; x < documentNames.size(); x++) {
@@ -302,39 +354,7 @@ public class SignUpFragment extends Fragment {
                 confirmPassword.setError("Password Doesn't Matched");
             }
         } else {
-            email.setError("Invalid Email");
-        }
-    }
-
-    private void setFragment(Fragment fragment) {
-
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slideout_from_left);
-        fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
-        fragmentTransaction.commit();
-    }
-    private void checkInputs() {
-        if (!TextUtils.isEmpty(email.getText())) {
-            if (TextUtils.isEmpty(fullName.getText())) {
-                if (TextUtils.isEmpty(password.getText()) && password.length()>= 8) {
-                    if (TextUtils.isEmpty(confirmPassword.getText())) {
-                        signUpBtn.setEnabled(true);
-                        signUpBtn.setTextColor(Color.rgb(255,255,255));
-                    } else {
-                        signUpBtn.setEnabled(true);
-                        signUpBtn.setTextColor(Color.argb(50,255,255,255));
-                    }
-                } else {
-                    signUpBtn.setEnabled(true);
-                    signUpBtn.setTextColor(Color.argb(50,255,255,255));
-                }
-            } else  {
-                signUpBtn.setEnabled(true);
-                signUpBtn.setTextColor(Color.argb(50,255,255,255));
-            }
-        } else {
-            signUpBtn.setEnabled(true);
-            signUpBtn.setTextColor(Color.argb(50,255,255,255));
+            email.setError("Invalid Email",customErrorIcon);
         }
     }
 

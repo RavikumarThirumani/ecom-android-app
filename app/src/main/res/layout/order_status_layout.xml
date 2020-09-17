@@ -15,6 +15,7 @@
         android:elevation="3dp"
         android:padding="5dp"
         android:text="Your Current order Status"
+        android:fontFamily="serif"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -48,6 +49,7 @@
         android:elevation="3dp"
         android:padding="16dp"
         android:text="OUT FOR DELIVERY"
+        android:fontFamily="serif"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -72,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_current_order_status">
 
         <ImageView
-            android:id="@+id/ordered_indicator"
+            android:id="@+id/ordere_indicator"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:tint="@color/RecyclerViewBackground"
@@ -91,7 +93,7 @@
             android:translationX="8dp" />
 
         <ImageView
-            android:id="@+id/packed_indicator"
+            android:id="@+id/packe_indicator"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:tint="@color/RecyclerViewBackground"
@@ -109,7 +111,7 @@
             android:progressTint="@color/successgreen" />
 
         <ImageView
-            android:id="@+id/shipped_indicator"
+            android:id="@+id/shippe_indicator"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:tint="@color/RecyclerViewBackground"
@@ -128,7 +130,7 @@
             android:translationX="-8dp" />
 
         <ImageView
-            android:id="@+id/delivered_indicator"
+            android:id="@+id/delivere_indicator"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:tint="@color/RecyclerViewBackground"

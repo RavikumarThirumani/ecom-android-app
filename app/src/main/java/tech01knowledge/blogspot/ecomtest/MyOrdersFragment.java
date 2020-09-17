@@ -1,6 +1,7 @@
 package tech01knowledge.blogspot.ecomtest;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,31 +27,42 @@ public class MyOrdersFragment extends Fragment {
     }
 
     private RecyclerView myOrdersRecyclerView;
+    public static MyOrderAdapter myOrderAdapter;
+    private Dialog loadingDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_orders, container, false);
+
+        //// LOading Dialog
+        loadingDialog = new Dialog(getContext());
+        loadingDialog.setContentView(R.layout.loading_progress_dialog);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawable(getContext().getDrawable(R.drawable.slider_background));
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadingDialog.show();
+        ///Loading dialog
+
         myOrdersRecyclerView = view.findViewById(R.id.my_orders_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         myOrdersRecyclerView.setLayoutManager(layoutManager);
 
-        List<MyOrderItemModel> myOrderItemModelList = new ArrayList<>();
-        myOrderItemModelList.add(new MyOrderItemModel(R.drawable.mob4, "Redmi Note 5(GOLD",3,
-                "Delivered on Monday 17th Feb 2020"));
-        myOrderItemModelList.add(new MyOrderItemModel(R.drawable.mob3, "Redmi Note 5(GOLD",2,
-                "Delivered on Monday 17th Feb 2020"));
-        myOrderItemModelList.add(new MyOrderItemModel(R.drawable.mob5, "Redmi Note 5(GOLD",1,
-                "Cancelled"));
-        myOrderItemModelList.add(new MyOrderItemModel(R.drawable.mob2, "Redmi Note 5(GOLD",4,
-                "Delivered on Monday 17th Feb 2020"));
 
-        MyOrderAdapter myOrderAdapter = new MyOrderAdapter(myOrderItemModelList);
+
+        myOrderAdapter = new MyOrderAdapter(DBqueries.myOrderItemModelList, loadingDialog);
         myOrdersRecyclerView.setAdapter(myOrderAdapter);
         myOrderAdapter.notifyDataSetChanged();
+
+        DBqueries.loadOrders(getContext(), myOrderAdapter,loadingDialog);
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        myOrderAdapter.notifyDataSetChanged();
+    }
 }

@@ -187,8 +187,8 @@ public class NewHomeFragment extends Fragment {
             if (lists.size() == 0) {
                 loadedCategoriesNames.add("HOME");
                 lists.add(new ArrayList<HomePageModel>());
-//                adapter = new HomePageAdapter(lists.get(0));  //##
-                loadFragmentData(homePageRecyclerView, getContext(),0, "Home");
+                adapter = new HomePageAdapter(lists.get(0));  //##
+                DBqueries.loadFragmentData(homePageRecyclerView, getContext(),0, "Home");
             } else {
                 adapter = new HomePageAdapter(lists.get(0));
                 adapter.notifyDataSetChanged();
@@ -408,9 +408,10 @@ public class NewHomeFragment extends Fragment {
 
     private void reloadPage() {
         networkInfo = connectivityManager.getActiveNetworkInfo();
-        categoryModelList.clear();
-        lists.clear();
-        loadedCategoriesNames.clear();
+//        categoryModelList.clear();
+//        lists.clear();
+//        loadedCategoriesNames.clear();
+        DBqueries.clearData();
         if (networkInfo != null && networkInfo.isConnected() == true) {
             MainActivity.drawer.setDrawerLockMode(0);
             noInternetConnection.setVisibility(View.GONE);

@@ -11,17 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:textColor="#000000"
-
-        android:text=" Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-
-        How to make an e-commerce android app?(Part-24)| Product Description Layout | Hindi Tutorial 2018
-
-Hello everyone...Iss video may hum product description layout add karengay...
-
-STAY TUNED...
-
-
-Plz support us by Like,Share,Comment and SUBSCRIBE
-
-THANK YOU" />
+        android:fontFamily="serif"
+        android:text="Plz support us by Like,Share,Comment and SUBSCRIBE THANK YOU" />
 </FrameLayout>

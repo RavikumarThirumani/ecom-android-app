@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -129,9 +130,9 @@ public class CategoryActivity extends AppCompatActivity {
         }
         if(listPosition==0){
             loadedCategoriesNames.add(title.toUpperCase());
-            lists.add(new ArrayList<HomePageModel>());
+            lists.add(new ArrayList<HomePageModel>()); ///.toUpperCase()
             adapter = new HomePageAdapter(lists.get(loadedCategoriesNames.size()-1));
-            loadFragmentData(categoryRecyclerview, this,loadedCategoriesNames.size()-1,title);
+            DBqueries.loadFragmentData(categoryRecyclerview, this,loadedCategoriesNames.size()-1,title);
         }else{
             adapter = new HomePageAdapter(lists.get(listPosition));
         }
@@ -154,6 +155,8 @@ public class CategoryActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.main_search_icon) {
+            Intent searchIntent = new Intent(this, SearchActivity.class);
+            startActivity(searchIntent);
             return true;
         } else if (id == R.id.home) {
             finish();

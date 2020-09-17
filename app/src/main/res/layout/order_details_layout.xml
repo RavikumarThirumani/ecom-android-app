@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     android:background="@color/colorAccent"
     android:elevation="3dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginTop="4dp"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/product_image"
@@ -27,8 +27,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Redmi Note 5 Pro(GOLD)"
-        android:textSize="16sp"
+        android:fontFamily="serif"
         android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Rs.49,999/-"
+        android:fontFamily="serif"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -49,11 +51,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Qty: 1"
-        android:textColor="#000000"
         android:background="@drawable/border_background"
         android:backgroundTint="#000000"
         android:padding="3dp"
+        android:text="Qty: 1"
+        android:fontFamily="serif"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/product_image"
         app:layout_constraintEnd_toStartOf="@+id/product_image" />
 
@@ -86,8 +89,8 @@
         android:layout_marginStart="9dp"
         android:layout_marginTop="8dp"
         android:progress="0"
-        android:progressTint="@color/successgreen"
         android:progressBackgroundTint="@color/RecyclerViewBackground"
+        android:progressTint="@color/successgreen"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/ordered_indicator"
@@ -112,8 +115,8 @@
         android:layout_marginStart="9dp"
         android:layout_marginTop="8dp"
         android:progress="0"
-        android:progressTint="@color/successgreen"
         android:progressBackgroundTint="@color/RecyclerViewBackground"
+        android:progressTint="@color/successgreen"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/packed_indicator"
@@ -163,6 +166,7 @@
         android:layout_marginStart="8dp"
         android:text="Orderd"
         android:textColor="#000000"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/ordered_indicator"
         app:layout_constraintStart_toEndOf="@+id/ordered_indicator"
@@ -173,6 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:fontFamily="serif"
         android:text="18th Tue 2020 - 7:00 PM"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/ordered_title"
@@ -185,8 +190,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Your Order has been placed"
-        android:textSize="10sp"
         android:textColor="#000000"
+        android:textSize="10sp"
+        android:fontFamily="serif"
         app:layout_constraintStart_toStartOf="@+id/ordered_title"
         app:layout_constraintTop_toBottomOf="@+id/ordered_title" />
 
@@ -196,6 +202,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Packed"
+        android:fontFamily="serif"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/packed_indicator"
@@ -208,6 +215,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="18th Tue 2020 - 7:00 PM"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/packed_title"
         app:layout_constraintStart_toEndOf="@+id/packed_title"
@@ -219,8 +227,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Your order has been packed"
-        android:textSize="10sp"
+        android:fontFamily="serif"
         android:textColor="#000000"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/packed_title"
         app:layout_constraintTop_toBottomOf="@+id/packed_title" />
 
@@ -232,6 +241,7 @@
         android:text="Shipping"
         android:textColor="#000000"
         android:textSize="12sp"
+        android:fontFamily="serif"
         app:layout_constraintBottom_toBottomOf="@+id/shipping_indicator"
         app:layout_constraintStart_toEndOf="@+id/shipping_indicator"
         app:layout_constraintTop_toTopOf="@+id/shipping_indicator" />
@@ -242,6 +252,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="18th Tue 2020 - 7:00 PM"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/shipping_title"
         app:layout_constraintStart_toEndOf="@+id/shipping_title"
@@ -253,8 +264,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Your order has been shipped"
-        android:textSize="10sp"
         android:textColor="#000000"
+        android:textSize="10sp"
+        android:fontFamily="serif"
         app:layout_constraintStart_toStartOf="@+id/shipping_title"
         app:layout_constraintTop_toBottomOf="@+id/shipping_title" />
 
@@ -265,6 +277,7 @@
         android:layout_marginStart="8dp"
         android:text="Delivered"
         android:textColor="#000000"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/delivered_indicator"
         app:layout_constraintStart_toEndOf="@+id/delivered_indicator"
@@ -276,6 +289,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="18th Tue 2020 - 7:00 PM"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/delivered_title"
         app:layout_constraintStart_toEndOf="@+id/delivered_title"
@@ -287,8 +301,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Your order has been delivered."
-        android:textSize="10sp"
+        android:fontFamily="serif"
         android:textColor="#000000"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/delivered_title"
         app:layout_constraintTop_toBottomOf="@+id/delivered_title" />
 
@@ -299,9 +314,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView31">
@@ -361,7 +374,7 @@
         android:id="@+id/divider10"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -375,7 +388,28 @@
         android:layout_marginTop="8dp"
         android:text="Your Ratings"
         android:textSize="10sp"
+        android:fontFamily="serif"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider10" />
+
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/RedColor"
+        android:stateListAnimator="@null"
+        android:text="Cancel order"
+        android:fontFamily="serif"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rate_now_container" />
 </androidx.constraintlayout.widget.ConstraintLayout>

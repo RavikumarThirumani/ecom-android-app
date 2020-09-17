@@ -11,6 +11,7 @@
         android:id="@+id/cart_items_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fontFamily="serif"
         android:background="@color/RecyclerViewBackground"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +25,7 @@
         android:background="@color/colorAccent"
         android:elevation="8dp"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -41,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rs.49,999/-"
+                android:fontFamily="serif"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -50,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="Total Amount"
                 android:textColor="#000000"
+                android:fontFamily="serif"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -61,6 +65,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/colorPrimary"
             android:text="Continue"
+            android:fontFamily="serif"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
             android:textStyle="bold" />

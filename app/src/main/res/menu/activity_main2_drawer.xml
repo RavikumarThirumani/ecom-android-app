@@ -33,12 +33,55 @@
             android:title="My Account" />
     </group>
 
-    <item
-        android:id="@+id/nav_sign_out"
-        android:title="Sign Out"
-        android:icon="@drawable/logout" />
+    <item android:title="Music">
+        <menu>
+            <item
+                android:id="@+id/nav_music"
+                android:icon="@drawable/music"
+                android:title="Play Music" />
+
+        </menu>
+    </item>
+
+    <item android:title="Social">
+        <menu>
+            <item
+                android:id="@+id/nav_fb"
+                android:icon="@drawable/facebook"
+                android:title="Facebook" />
+            <item
+                android:id="@+id/nav_insta"
+                android:icon="@drawable/instagram"
+                android:title="Instagram" />
+        </menu>
+    </item>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_send" />
+        </menu>
+    </item>
+
+    <item>
+        <menu>
+            <item
+                android:id="@+id/nav_sign_out"
+                android:title="Sign Out"
+                android:icon="@drawable/logout" />
+        </menu>
+    </item>
 
 
 
+<!--    android:id="@+id/nav_sign_out"
+            android:title="Sign Out"
+            android:icon="@drawable/logout"-->
 
 </menu>

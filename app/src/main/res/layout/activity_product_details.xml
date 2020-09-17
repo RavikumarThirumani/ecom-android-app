@@ -85,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="ADD TO CART"
+                android:fontFamily="serif"
                 android:drawableEnd="@mipmap/cart"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
@@ -95,16 +96,18 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/buy_now_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/buy_now_btn"
-            android:text="BUY NOW"
+            android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:textColor="@color/colorAccent"
             android:stateListAnimator="@null"
+            android:text="BUY NOW"
+            android:fontFamily="serif"
+            android:textColor="@color/colorAccent"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_weight="1" />
+            tools:visibility="gone" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

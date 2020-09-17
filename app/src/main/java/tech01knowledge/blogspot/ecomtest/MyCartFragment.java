@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class MyCartFragment extends Fragment {
 
     private Dialog loadingDialog;
     public static CartAdapter cartAdapter;
+    private TextView totalAmount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +50,6 @@ public class MyCartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_cart, container, false);
 
         //// LOading Dialog
-        loadingDialog = new Dialog(getContext());
         loadingDialog = new Dialog(getContext());
         loadingDialog.setContentView(R.layout.loading_progress_dialog);
         loadingDialog.setCancelable(false);
@@ -58,32 +60,84 @@ public class MyCartFragment extends Fragment {
 
         cartItemsRecyclerview = view.findViewById(R.id.cart_items_recyclerview);
         continueBtn = view.findViewById(R.id.cart_continue_btn);
+        totalAmount = view.findViewById(R.id.total_cart_amount);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         cartItemsRecyclerview.setLayoutManager(layoutManager);
 
-        if (cartItemModelList.size() == 0) {
-            DBqueries.cartList.clear();
-            DBqueries.loadCartList(getContext(),loadingDialog, true, new TextView(getContext()));
-        } else {
-            loadingDialog.dismiss();
-        }
+
 
 
 
 //        once again see this cart fragmnet lec
-        cartAdapter = new CartAdapter(cartItemModelList);
+        cartAdapter = new CartAdapter(cartItemModelList, totalAmount, true);
         cartItemsRecyclerview.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent deliveryIntent = new Intent(getContext(), AddAddressActivity.class);
-                getContext().startActivity(deliveryIntent);
+
+                DeliveryActivity.cartItemModelList = new ArrayList<>();
+                DeliveryActivity.fromCart = true;
+                for (int x = 0; x < cartItemModelList.size(); x++) {
+                    CartItemModel cartItemModel = cartItemModelList.get(x);
+                    if (cartItemModel.isInStock()) {
+                        DeliveryActivity.cartItemModelList.add(cartItemModel);
+                    }
+                }
+                DeliveryActivity.cartItemModelList.add(new CartItemModel(CartItemModel.TOTAL_AMOUNT));
+
+                loadingDialog.show();
+                if (DBqueries.addressModelList.size() == 0) {
+                    DBqueries.loadAddresses(getContext(), loadingDialog, true);
+                } else {
+                    loadingDialog.dismiss();
+                    Intent deliveryIntent = new Intent(getContext(), DeliveryActivity.class);
+                    startActivity(deliveryIntent);
+                }
             }
         });
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        cartAdapter.notifyDataSetChanged();
+        if (DBqueries.rewardModelList.size() == 0) {
+            loadingDialog.show();
+            DBqueries.loadRewards(getContext(), loadingDialog, false);
+        }
+        if (cartItemModelList.size() == 0) {
+            DBqueries.cartList.clear();
+            DBqueries.loadCartList(getContext(),loadingDialog, true, new TextView(getContext()), totalAmount);
+        } else {
+            if (cartItemModelList.get(DBqueries.cartItemModelList.size() -1).getType() == CartItemModel.TOTAL_AMOUNT) {
+                LinearLayout parent = (LinearLayout) totalAmount.getParent().getParent();
+                parent.setVisibility(View.VISIBLE);
+            }
+            loadingDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        for (CartItemModel cartItemModel : cartItemModelList) {
+            if (!TextUtils.isEmpty(cartItemModel.getSelectedCoupenId())) {
+                for (RewardModel rewardModel : DBqueries.rewardModelList) {
+                    if (rewardModel.getCoupenId().equals(cartItemModel.getSelectedCoupenId())) {
+                        rewardModel.setAlreadyUsed(false);
+                    }
+                }
+                cartItemModel.setSelectedCoupenId(null);
+                if (MyRewardsFragment.myRewardsAdapter != null) {
+                    MyRewardsFragment.myRewardsAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+    }
 }

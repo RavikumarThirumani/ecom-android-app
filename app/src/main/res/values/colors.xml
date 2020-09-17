@@ -8,4 +8,7 @@
     <color name="RecyclerViewBackground">#d6d6d6</color>
 
     <color name="RedColor">#ff0000</color>
+    <color name="coupenPurple">#3606b6</color>
+    <color name="coupenRed">#FF3030</color>
+<!--    cfd8dc-->
 </resources>

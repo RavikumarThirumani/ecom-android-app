@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Deals of the Day"
+        android:fontFamily="serif"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -31,6 +32,7 @@
         android:text="View all"
         android:textColor="@color/colorAccent"
         android:textSize="12sp"
+        android:fontFamily="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="invisible" />
@@ -41,5 +43,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="serif"
         app:layout_constraintTop_toBottomOf="@+id/horizontal_scrool_view_all_btn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

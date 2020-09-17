@@ -11,8 +11,8 @@ public class ProductDetailsAdapter extends FragmentPagerAdapter {
 
     private int totalTabs;
     private String productDescription;
-    private  String productOtherDetails;
     private List<ProductSpecificationModel> productSpecificationModelList;
+    private  String productOtherDetails;
 
     public ProductDetailsAdapter(@NonNull FragmentManager fm, int totalTabs, String productDescription, String productOtherDetails, List<ProductSpecificationModel> productSpecificationModelList) {
         super(fm);

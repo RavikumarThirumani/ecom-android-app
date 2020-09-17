@@ -28,6 +28,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Redmi 5"
+        android:fontFamily="serif"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Free Coupon"
+        android:fontFamily="serif"
         android:textSize="12sp"
         android:textColor="#8000FF"
         app:layout_constraintStart_toEndOf="@+id/coupen_icon"
@@ -93,6 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(2,732) ratings"
+        android:fontFamily="serif"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintStart_toEndOf="@+id/linearLayout" />
@@ -104,6 +107,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Rs.49,999/-"
+        android:fontFamily="serif"
         android:textSize="16sp"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -116,6 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Rs.59,999/-"
+        android:fontFamily="serif"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_price"
         app:layout_constraintStart_toEndOf="@+id/product_price" />
@@ -127,6 +132,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="Cash on delivery available"
+        android:fontFamily="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/product_price"
         app:layout_constraintTop_toBottomOf="@+id/product_price" />

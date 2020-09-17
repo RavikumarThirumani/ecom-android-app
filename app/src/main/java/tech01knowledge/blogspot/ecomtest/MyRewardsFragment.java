@@ -1,6 +1,7 @@
 package tech01knowledge.blogspot.ecomtest;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,8 @@ public class MyRewardsFragment extends Fragment {
     }
 
     private RecyclerView rewardsRecyclerView;
+    private Dialog loadingDialog;
+    public static MyRewardsAdapter myRewardsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,27 +33,28 @@ public class MyRewardsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_rewards, container, false);
 
+        //// LOading Dialog
+        loadingDialog = new Dialog(getContext());
+        loadingDialog.setContentView(R.layout.loading_progress_dialog);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawable(getContext().getDrawable(R.drawable.slider_background));
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadingDialog.show();
+        ///Loading dialog
+
         rewardsRecyclerView = view.findViewById(R.id.my_rewards_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-
         rewardsRecyclerView.setLayoutManager(layoutManager);
 
-        List<RewardModel> rewardModelList = new ArrayList<>();
-        rewardModelList.add(new RewardModel("Cashback", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Discount", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("But 1 GET 1 FREE", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Cashback", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Cashback", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Cashback", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Cashback", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Cashback", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Discount", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("But 1 GET 1 FREE", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-        rewardModelList.add(new RewardModel("Cashback", "TIll 23 MAR 2020","GET 20% CASHBACK ON ANY PRODUCT ABOVE Rs.200/- AND BELOW Rs.3000/-"));
-
-        MyRewardsAdapter myRewardsAdapter = new MyRewardsAdapter(rewardModelList,false);
+        myRewardsAdapter = new MyRewardsAdapter(DBqueries.rewardModelList,false);
         rewardsRecyclerView.setAdapter(myRewardsAdapter);
+
+        if (DBqueries.rewardModelList.size() == 0) {
+            DBqueries.loadRewards(getContext(), loadingDialog, true);
+        } else {
+            loadingDialog.dismiss();
+        }
         myRewardsAdapter.notifyDataSetChanged();
 
         return view;
